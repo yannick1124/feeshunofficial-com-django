@@ -1,22 +1,18 @@
 from .base import *
-from decouple import config
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("DJANGO_SECRET_KEY")
+SECRET_KEY = "django-insecure-p7t)#%r4(a7&3-oe=v1knt7-b26+^ph4)c@(-m-qc2e4nf*ea0"
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
+ALLOWED_HOSTS = ["*"]
 
-DATABASES = {
-    "default": {
-        "ENGINE": config("DB_ENGINE"),
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "PORT": config("DB_PORT"),
-    }
-}
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+try:
+    from .local import *
+except ImportError:
+    pass
