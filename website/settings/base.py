@@ -25,6 +25,7 @@ BASE_DIR = PROJECT_DIR.parent
 
 INSTALLED_APPS = [
     "home",
+    "blog",
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtailmarkdown",
     "modelcluster",
     "taggit",
     "django_filters",

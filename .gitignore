@@ -4,6 +4,7 @@ __pycache__/
 
 # Virtual environments
 .venv/
+.venv-linux/
 env/
 venv/
 ENV/
@@ -32,3 +33,10 @@ staticfiles/
 Thumbs.db
 .cursorignore
 .cursorindexingignore
+
+# Wagtail migrations
+**/migrations/
+
+# Workspaces
+.workspaces/
+.vscode/
