@@ -3,5 +3,5 @@
 
 {% block content %}
     {{ page.outtro|richtext }}
-    <p><a href="/">Back to Homepage</a></p>
+    <p><a href="{% pageurl page.get_parent %}">Back to the lab again</a></p>
 {% endblock %}
