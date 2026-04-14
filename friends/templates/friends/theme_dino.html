@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {% include "friends/answer_name.html" with answer_value=page.friend_name %}
+    {% include "friends/answer_know_from.html" with answer_value=page.friend_know_from %}
+    {% if page.friend_contact %}
+        {% include "friends/answer_contact.html" with answer_value=page.friend_contact %}
+    {% endif %}
+    {% include "friends/answer_bday.html" with answer_value=page.friend_bday answer_age=page.friend_age %}
+{% endblock %}
