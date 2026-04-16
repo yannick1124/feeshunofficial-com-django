@@ -25,6 +25,7 @@
 
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/website.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/nav_waffle.css' %}">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -33,6 +34,8 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+
+        {% include "nav_waffle.html" %}
 
         {% block content %}{% endblock %}
 

@@ -2,7 +2,8 @@ from django.db import models
 
 from django.shortcuts import redirect
 from wagtail.models import Page
-from wagtail.admin.panels import PageChooserPanel
+from wagtail.admin.panels import FieldPanel, PageChooserPanel
+from wagtailmarkdown.fields import MarkdownField
 
 class GenericRedirectPage(Page):
     '''
@@ -37,3 +38,10 @@ class GenericRedirectPage(Page):
             return redirect(request.site.root_page.url, permanent=False)
 
         return super().serve(request)
+
+class MarkdownPage(Page):
+    body = MarkdownField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body')
+    ]

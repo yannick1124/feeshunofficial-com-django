@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "labs",
     "friends",
     "search",
+    "website",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",

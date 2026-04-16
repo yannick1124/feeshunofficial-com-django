@@ -1,0 +1,51 @@
+{% load static website_tags %}
+{% get_waffle_menu as menu %}
+
+<div class="waffle-nav">
+    <button class="waffle-btn" onclick="toggleWaffle()" aria-label="Apps Menu">
+        <img src="{% static 'images/icons/waffle.svg' %}"
+             alt="Menu"
+             class="waffle-icon-img">
+    </button>
+
+    <div id="waffle-menu" class="waffle-menu-grid">
+        {% if menu %}
+            {% for item in menu.menu_items.all %}
+                {% if not item.hide_on_url_keyword or item.hide_on_url_keyword not in request.path %}
+                    <a href="{{ item.link_url }}" class="waffle-item">
+                        <img src="{{ item.icon_url }}"
+                            alt=""
+                            class="waffle-item-icon-img">
+                        <span class="waffle-label">{{ item.label }}</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if "/friends/" in request.path and user.is_staff %}
+            <a href="" class="waffle-item add-btn">
+                <img src="{% static 'images/icons/add.svg' %}"
+                     alt=""
+                     class="waffle-item-icon-img">
+                <span class="waffle-label">Add</span>
+            </a>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleWaffle() {
+            document.getElementById('waffle-menu').classList.toggle('active');
+        }
+
+        window.onclick = function(event) {
+            const menu = document.getElementById('waffle-menu');
+            const btn = document.querySelector('.waffle-btn');
+
+            if (!btn.contains(event.target) && !menu.contains(event.target)) {
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                }
+            }
+        }
+    </script>
+</div>
