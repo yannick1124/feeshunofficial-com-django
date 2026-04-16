@@ -2,10 +2,66 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
+    {% include "friends/element_picture.html" with picture=page.friend_picture theme_shape="frame-egg" %}
+    
+    {% comment %} Required {% endcomment %}
     {% include "friends/answer_name.html" with answer_value=page.friend_name %}
+
+    {% comment %} Required {% endcomment %}
     {% include "friends/answer_know_from.html" with answer_value=page.friend_know_from %}
+
+    {% comment %} Optional {% endcomment %}
     {% if page.friend_contact %}
         {% include "friends/answer_contact.html" with answer_value=page.friend_contact %}
     {% endif %}
+
+    {% comment %} Required {% endcomment %}
     {% include "friends/answer_bday.html" with answer_value=page.friend_bday answer_age=page.friend_age %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_siblings %}
+        {% include "friends/answer_siblings.html" with answer_value=page.friend_siblings %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_color %}
+        {% include "friends/answer_color.html" with answer_value=page.friend_color %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_animal %}
+        {% include "friends/answer_animal.html" with answer_value=page.friend_animal %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_book %}
+        {% include "friends/answer_book.html" with answer_value=page.friend_book %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_movie %}
+        {% include "friends/answer_movie.html" with answer_value=page.friend_movie %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_food %}
+        {% include "friends/answer_food.html" with answer_value=page.friend_food %}
+    {% endif %}
+
+    {% comment %} Required {% endcomment %}
+    {% comment %} Theme question {% endcomment %}
+    {% include "friends/special_answer_dino.html" with answer_value=page.friend_dino %}
+
+    {% comment %} Required {% endcomment %}
+    {% include "friends/answer_cool.html" with answer_value=page.friend_cool %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_likes %}
+        {% include "friends/answer_likes.html" with items=page.friend_likes %}
+    {% endif %}
+
+    {% comment %} Optional {% endcomment %}
+    {% if page.friend_dislikes %}
+        {% include "friends/answer_dislikes.html" with items=page.friend_dislikes %}
+    {% endif %}
 {% endblock %}

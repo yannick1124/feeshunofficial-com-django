@@ -1,0 +1,13 @@
+{% if answer_value %}
+<div class="answer answer-likes">
+    <span class="question-label">
+        I like these things:
+    </span>
+    <ul>
+        {% for item in items %}{% endfor %}
+        <li>
+            <span class="answer-label">{{ item }}</span>
+        </li>
+    </ul>
+</div>
+{% endif %}

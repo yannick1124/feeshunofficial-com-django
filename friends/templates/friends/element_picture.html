@@ -1,0 +1,14 @@
+{% load wagtailimages_tags %}
+
+<div class="picture-frame {{ theme_shape }}">
+    {% if picture %}
+        {% image picture fill-300x300 as img %}
+        <img src="{{ img.url }}"
+             width="{{ img.width }}"
+             height="{{ img.height }}"
+             alt="{{ picture.title }}"
+             class="profile-image">
+    {% else %}
+        <div class="picture-placeholder"></div>
+    {% endif %}
+</div>

@@ -13,6 +13,9 @@ ENV/
 .env
 .env.*
 .envrc
+.aliases
+.bashrc
+bin/
 
 # Django / Wagtail runtime
 *.log

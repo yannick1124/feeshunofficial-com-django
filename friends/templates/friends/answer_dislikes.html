@@ -1,0 +1,13 @@
+{% if answer_value %}
+<div class="answer answer-dilikes">
+    <span class="question-label">
+        These are the things I don't like:
+    </span>
+    <ul>
+        {% for item in items %}{% endfor %}
+        <li>
+            <span class="answer-label">{{ item }}</span>
+        </li>
+    </ul>
+</div>
+{% endif %}
