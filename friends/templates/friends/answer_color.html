@@ -2,8 +2,9 @@
 <div class="answer answer-color">
     <span class="question-label">
         My favorite color is
-        <span class="answer-label">{{ answer_value }}</span>
-        <div class="answer-color"></div>
+        <span class="answer-color-display">
+            <div class="display-color" style="background-color: {{ answer_value }};"></div>
+        </span>
     </span>
 </div>
 {% endif %}

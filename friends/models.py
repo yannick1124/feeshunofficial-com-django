@@ -5,6 +5,9 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 
+from wagtail_color_panel.fields import ColorField
+from wagtail_color_panel.edit_handlers import NativeColorPanel
+
 from datetime import date
 
 class FriendPage(Page):
@@ -30,8 +33,7 @@ class FriendPage(Page):
         null=True,
         blank=True
     )
-    friend_color = models.CharField(
-        max_length=255,
+    friend_color = ColorField(
         null=True,
         blank=True
     )
@@ -92,7 +94,7 @@ class FriendPage(Page):
         FieldPanel('friend_contact', heading='I can be reached at ___:'),
         FieldPanel('friend_bday', heading='My birthday is at ___ and I am [autofill] years old:'),
         FieldPanel('friend_siblings', heading='I have ___ siblings:'),
-        FieldPanel('friend_color', heading='My favorite color is ___:'),
+        NativeColorPanel('friend_color', heading='My favorite color is ___:'),
         FieldPanel('friend_animal', heading='My favorite animal is ___:'),
         FieldPanel('friend_book', heading='My favorite book is ___:'),
         FieldPanel('friend_movie', heading='My favorite movie is ___:'),
@@ -125,4 +127,16 @@ class DinoFriendPage(FriendPage):
 
     content_panels = FriendPage.content_panels + [
         FieldPanel('friend_dino', heading='My favorite dinosaur is ___:')
+    ]
+
+class MagicFriendPage(FriendPage):
+    template = 'friends/theme_magic.html'
+
+    friend_magic = models.CharField(
+        max_length=255,
+        default='[How did you do this? This is a required field!]'
+    )
+
+    content_panels = FriendPage.content_panels + [
+        FieldPanel('friend_magic', heading='If I had magic, it would be ___ magic:')
     ]

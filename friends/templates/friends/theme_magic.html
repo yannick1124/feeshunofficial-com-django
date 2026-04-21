@@ -3,14 +3,14 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href={% static 'css/friend-page.css' %}>
-<link rel="stylesheet" href={% static 'css/dino.css' %}>
+<link rel="stylesheet" href={% static 'css/magic.css' %}>
 {% endblock %}
 
 {% block content %}
     <div class="page page-left">
         {% comment %} Optional {% endcomment %}
         {% if page.friend_picture %}
-        {% include "friends/element_picture.html" with picture=page.friend_picture theme_shape="frame-egg" %}
+        {% include "friends/element_picture.html" with picture=page.friend_picture theme_shape="frame-crystal-ball" frame_foreground=True %}
         {% endif %}
         
         {% comment %} Required {% endcomment %}
@@ -62,7 +62,7 @@
 
         {% comment %} Required {% endcomment %}
         {% comment %} Theme question {% endcomment %}
-        {% include "friends/special_answer_dino.html" with answer_value=page.friend_dino %}
+        {% include "friends/special_answer_magic.html" with answer_value=page.friend_magic %}
     </div>
     
     <div class="page page-right">

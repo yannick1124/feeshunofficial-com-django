@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static %}
+
+{% block content %}
+    <form action="{% pageurl page %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+{% endblock %}

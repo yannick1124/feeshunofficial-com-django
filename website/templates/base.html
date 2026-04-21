@@ -27,17 +27,23 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/website.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/nav_waffle.css' %}">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+        {% comment %} {% wagtailuserbar %} {% endcomment %}
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
 
         {% include "nav_waffle.html" %}
-
-        {% block content %}{% endblock %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/website.js' %}"></script>

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "JelloStone";
+    src: url("../fonts/JelloStone-YqKz8.woff2") format("woff2");
+}
+
+body {
+    background-color: #1c3a13;
+}
+
+.page {
+    background-color: #fff8dc;
+}
+
+.question-label {
+    font-family: "JelloStone";
+    color: #5A4522;
+}
+
+.answer-label {
+    color: #ec4e20;
+}
+
+.picture-frame.frame-egg img {
+    mask-image: url("../images/frames/mask-egg.png");
+    mask-origin: content-box;
+    mask-size: 100% 100%;
+}
+
+@media screen and (width <= 500px) {
+    .picture-frame {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 0;
+    }
+}
+
+@media screen and (width > 500px) {
+    .picture-frame {
+        position: relative;
+        float: right;
+        margin: -3rem -4rem 16px 0;
+    }
+}

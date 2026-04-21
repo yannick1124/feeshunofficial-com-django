@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail",
     "wagtailmarkdown",
+    "wagtail_color_panel",
     "modelcluster",
     "taggit",
     "django_filters",
