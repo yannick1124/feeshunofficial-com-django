@@ -1,0 +1,72 @@
+/* Moved this to `text_page.css` */
+/* .content {
+    display: flex;
+    flex-direction: column;
+} */
+
+.nav-container {
+    flex-shrink: 0;
+    position: relative;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    gap: 20px;
+    width: 100%;
+    margin-top: auto;
+    padding-top: 50px;
+}
+
+.nav-button {
+    display: flex;
+    height: 160px;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+    border-radius: 15px;
+    font-size: x-large;
+    background-color: #b9eed8;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.5s ease,
+                box-shadow 0.5s ease;
+}
+.nav-button:hover {
+    background-color: #e2f7ee;
+    box-shadow: 0px 2px 16px -2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-icon {
+    filter:
+        brightness(0)
+        saturate(100%)
+        invert(51%)
+        sepia(64%)
+        saturate(502%)
+        hue-rotate(105deg)
+        brightness(53%)
+        contrast(86%);
+    width: auto;
+    height: 50%;
+    margin: 8px;
+    transition: transform 0.5s ease;
+}
+.nav-button:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.nav-label {
+    color: #1d674d;
+}
+
+@media screen and (width <= 900px) {
+    .nav-container {
+        grid-auto-columns: 100%;
+        grid-auto-flow: row;
+    }
+
+    .nav-button {
+        height: 60px;
+        flex-direction: row;
+    }
+}

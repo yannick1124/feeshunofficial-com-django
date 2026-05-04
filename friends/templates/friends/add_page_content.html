@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static 'css/text_page.css' %}>
+    <link rel="stylesheet" href={% static 'css/add_pages.css' %}>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" class="content-extension">
+        {% csrf_token %}
+        <div class="form-container questions">
+            {% for question in theme_questions %}
+                <div class="theme-field form-item">
+                    <label>{{ question.label }}{% if question.required %}*{% endif %}</label>
+                    
+                    {% if question.choices %}
+                        <select name="{{ question.name }}">
+                            {% for val, label in question.choices %}
+                                <option value="{{ val }}">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+
+                    {% elif question.type == 'DateField' %}
+                        <input type="date" name="{{ question.name }}">
+
+                    {% elif question.type == 'ColorField' or 'Color' in question.type %}
+                        <input type="color" name="{{ question.name }}" value="#fff">
+                    
+                    {% elif question.type == 'ImageChooser' %}
+                        {% comment %} TODO: HAVE TO UPDATE THIS {% endcomment %}
+                        {% comment %}       MAKE CUSTOM IMAGE SELECTOR {% endcomment %}
+                        <input type="file" name="{{ question.name }}" accept="image/*">
+                    
+                    {% elif question.type == 'StreamField' %}
+                        <div class="streamfield-container" id="container-{{ question.name }}">
+                            <div class="stream-entries">
+                                <div class="stream-item-wrapper">
+                                    <input type="text" name="{{ question.name }}" class="form-item" placeholder="Enter item...">
+                                    <button type="button" class="remove-stream-item" style="display:none;">&times;</button>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    {% else %}
+                        <input type="text" name="{{ question.name }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <div class="submit-container form-item">
+                <button type="submit">Continue to content</button>
+            </div>
+        </div>
+    </form>
+    
+    <script type="text/javascript" src={% static 'js/add_pages.js' %}></script>
+{% endblock %}

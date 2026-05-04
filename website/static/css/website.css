@@ -1,0 +1,20 @@
+body {
+    font-family: "Noto Sans", sans-serif;
+}
+
+body.accessibility-mode * {
+    font-family: "Noto Sans", sans-serif !important;
+    line-height: 1.8 !important;
+    color: black;
+}
+
+body.accessibility-mode span,
+body.accessibility-mode p,
+body.accessibility-mode h1,
+body.accessibility-mode h2,
+body.accessibility-mode h3,
+body.accessibility-mode h4,
+body.accessibility-mode h5,
+body.accessibility-mode h6 {
+    background-color: white;
+}

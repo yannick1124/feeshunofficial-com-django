@@ -46,6 +46,10 @@ class WaffleMenuItem(Orderable):
         max_length=100,
         blank=True
     )
+    aria_label = models.CharField(
+        max_length=255,
+        blank=True
+    )
 
     @property
     def icon_url(self):
@@ -55,5 +59,6 @@ class WaffleMenuItem(Orderable):
         FieldPanel('label'),
         FieldPanel('link_url'),
         FieldPanel('icon_name'),
-        FieldPanel('hide_on_url_keyword')
+        FieldPanel('hide_on_url_keyword'),
+        FieldPanel('aria_label')
     ]

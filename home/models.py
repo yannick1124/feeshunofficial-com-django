@@ -18,7 +18,7 @@ class GenericRedirectPage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        help_text="The page to redirect to."
+        help_text='The page to redirect to.'
     )
 
     content_panels = Page.content_panels + [
@@ -43,5 +43,21 @@ class MarkdownPage(Page):
     body = MarkdownField(blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('body')
+    ]
+
+class LandingPage(Page):
+    picture = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    body = MarkdownField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('picture'),
         FieldPanel('body')
     ]

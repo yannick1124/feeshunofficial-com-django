@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="nav-container">
+    {% for item in buttons.split %}
+        {% if item == 'home' %}
+            <a href="/" class="nav-button">
+        {% else %}
+            <a href="/{{ item }}/" class="nav-button">
+        {% endif %}
+            <img src="{% get_static_prefix %}images/icons/{{ item }}.svg"
+                 alt=""
+                 class="nav-icon">
+            <span class="nav-label nav-label-{{ item }}">{{ item }}</span>
+        </a>
+    {% endfor %}
+</div>

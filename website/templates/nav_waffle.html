@@ -9,10 +9,26 @@
     </button>
 
     <div id="waffle-menu" class="waffle-menu-grid">
+        <span type="button" class="waffle-item toggle-btn" onclick="toggleAccessibility()" aria-label="Toggle Accessibility Mode">
+            <img src="{% static 'images/icons/contrast.svg' %}"
+                    alt=""
+                    class="waffle-item-icon-img">
+            <span class="waffle-label">Easy Read</span>
+        </span>
+
+        {% if "/friends/" in request.path and user.is_staff %}
+            <a href="" class="waffle-item add-btn" aria-label="Add New Friends Page">
+                <img src="{% static 'images/icons/add.svg' %}"
+                     alt=""
+                     class="waffle-item-icon-img">
+                <span class="waffle-label">Add</span>
+            </a>
+        {% endif %}
+
         {% if menu %}
             {% for item in menu.menu_items.all %}
                 {% if not item.hide_on_url_keyword or item.hide_on_url_keyword not in request.path %}
-                    <a href="{{ item.link_url }}" class="waffle-item">
+                    <a href="{{ item.link_url }}" class="waffle-item" {% if item.aria_label %}aria-label="{{ item.aria_label }}"{% endif %}>
                         <img src="{{ item.icon_url }}"
                             alt=""
                             class="waffle-item-icon-img">
@@ -20,15 +36,6 @@
                     </a>
                 {% endif %}
             {% endfor %}
-        {% endif %}
-
-        {% if "/friends/" in request.path and user.is_staff %}
-            <a href="" class="waffle-item add-btn">
-                <img src="{% static 'images/icons/add.svg' %}"
-                     alt=""
-                     class="waffle-item-icon-img">
-                <span class="waffle-label">Add</span>
-            </a>
         {% endif %}
     </div>
 

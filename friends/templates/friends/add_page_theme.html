@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static 'css/text_page.css' %}>
+    <link rel="stylesheet" href={% static 'css/add_pages.css' %}>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ page.form_target.url }}" method="get" class="content-extension">
+        <div class="form-container themes">
+            <div class="selector-container form-item">
+                <select name="theme" id="theme-selector">
+                    {% for key, info in THEMES.items %}
+                    <option value="{{ key }}" data-example="{{ info.image }}">{{ info.label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="submit-container form-item">
+                <button type="submit">Continue to content</button>
+            </div>
+        </div>
+            
+        <div class="example-container">
+            <img id="theme-example"
+                 class="theme-example"
+                 src="/static/images/examples/dino_example.png"
+                 alt="Theme Preview">
+        </div>
+    </form>
+    
+    <script type="text/javascript" src={% static 'js/add_pages.js' %}></script>
+{% endblock %}
