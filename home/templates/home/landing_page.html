@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load wagtailcore_tags static %}
-{% load wagtailmarkdown %}
+{% load wagtailcore_tags static wagtailimages_tags wagtailmarkdown %}
 
 {% block title %}
     {{ page.title }}
@@ -12,7 +11,10 @@
 {% endblock %}
 
 {% block content %}
-    {{ page.picture }}
+    {% if page.picture %}
+        {% image page.picture fill-800x400 as tmp_photo %}
+        <img src="{{ tmp_photo.url }}" width="{{ tmp_photo.width }}" height="{{ tmp_photo.height }}" alt="{{ tmp_photo.alt }}">
+    {% endif %}
     {{ page.body|markdown }}
 
     {% include 'home/nav_buttons.html' with buttons='labs friends contact disclaimer' %}
