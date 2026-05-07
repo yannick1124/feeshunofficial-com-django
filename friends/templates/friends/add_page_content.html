@@ -7,43 +7,47 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post" class="content-extension">
+    <form action="{{ page.url }}?theme={{ request.GET.theme }}" method="post"enctype="multipart/form-data" class="content-extension">
         {% csrf_token %}
+        <input type="hidden" name="theme" value="{{ request.GET.theme }}">
+        {% comment %} TODO: ADD AUTOMATIC TITLE IN MODELS {% endcomment %}
         <div class="form-container questions">
             {% for question in theme_questions %}
                 <div class="theme-field form-item">
-                    <label>{{ question.label }}{% if question.required %}*{% endif %}</label>
+                    <label>{{ question.label }}{% if question.required %} <span class="required">*</span>{% endif %}</label>
                     
                     {% if question.choices %}
-                        <select name="{{ question.name }}">
+                        <select name="{{ question.name }}" {% if question.required %}required{% endif %}>
                             {% for val, label in question.choices %}
                                 <option value="{{ val }}">{{ label }}</option>
                             {% endfor %}
                         </select>
 
                     {% elif question.type == 'DateField' %}
-                        <input type="date" name="{{ question.name }}">
+                        <input type="date" class="type-date" name="{{ question.name }}" {% if question.required %}required{% endif %}>
 
                     {% elif question.type == 'ColorField' or 'Color' in question.type %}
-                        <input type="color" name="{{ question.name }}" value="#fff">
+                        <input type="color" class="type-color" name="{{ question.name }}" value="#fff" {% if question.required %}required{% endif %}>
                     
                     {% elif question.type == 'ImageChooser' %}
                         {% comment %} TODO: HAVE TO UPDATE THIS {% endcomment %}
-                        {% comment %}       MAKE CUSTOM IMAGE SELECTOR {% endcomment %}
-                        <input type="file" name="{{ question.name }}" accept="image/*">
+                        {% comment %}       MAKE CUSTOM IMAGE SELECTOR THAT LETS YOU CROP IMAGES {% endcomment %}
+                        <input type="file" class="type-image" name="{{ question.name }}" accept="image/*" {% if question.required %}required{% endif %}>
                     
                     {% elif question.type == 'StreamField' %}
+                        {% comment %} TODO: RETAIN INPUTS WHEN GOING BACK TO LAST PAGE {% endcomment %}
                         <div class="streamfield-container" id="container-{{ question.name }}">
-                            <div class="stream-entries">
-                                <div class="stream-item-wrapper">
-                                    <input type="text" name="{{ question.name }}" class="form-item" placeholder="Enter item...">
-                                    <button type="button" class="remove-stream-item" style="display:none;">&times;</button>
-                                </div>
-                            </div>
+                            <ul class="stream-entries">
+                                <li class="stream-item-wrapper form-item">
+                                    <span class="entry-bullet">&bull;</span>
+                                    <input type="text" name="{{ question.name }}" class="stream-input type-stream" {% if question.required %}required{% endif %}>
+                                    <button type="button" class="remove-stream-item" style="visibility:hidden"><img src="{% static 'images/icons/close_small.svg' %}" alt="&times;"></button>
+                                </li>
+                            </ul>
                         </div>
                     
                     {% else %}
-                        <input type="text" name="{{ question.name }}">
+                        <input type="text" name="{{ question.name }}" {% if question.required %}required{% endif %}>
                     {% endif %}
                 </div>
             {% endfor %}
@@ -53,6 +57,8 @@
             </div>
         </div>
     </form>
-    
+{% endblock %}
+
+{% block extra_js %}
     <script type="text/javascript" src={% static 'js/add_pages.js' %}></script>
 {% endblock %}

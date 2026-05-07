@@ -28,11 +28,12 @@ if (selector) {
 /////////////
 
 document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form.content-extension');
     const streams = document.querySelectorAll('.streamfield-container');
 
     streams.forEach(stream => {
         stream.addEventListener('input', (e) => {
-            if (!e.target.matches('.form-item')) return;
+            if (!e.target.matches('.stream-input')) return;
 
             const entriesDiv = stream.querySelector('.stream-entries');
             const lastItem = entriesDiv.querySelector('.stream-item-wrapper:last-child');
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const newBtn = newItem.querySelector('.remove-stream-item');
 
                 newInput.value = '';
-                newBtn.style.display = 'none';
+                newBtn.style.visibility = 'hidden';
 
                 entriesDiv.appendChild(newItem);
             }
@@ -53,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentBtn = currentWrapper.querySelector('.remove-stream-item');
 
             if (e.target.value.trim() !== '') {
-                currentBtn.style.display = 'inline-block';
+                currentBtn.style.visibility = 'visible';
             }
             else if (currentWrapper !== lastItem) {
-                currentBtn.style.display = 'none';
+                currentBtn.style.visibility = 'hidden';
             }
         });
 
@@ -71,6 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     wrapper.remove();
                 }
             }
+        });
+    });
+
+    form.addEventListener('submit', (e) => {
+        streams.forEach(stream => {
+            const fieldName = stream.id.replace('container-', '');
+            const inputs = stream.querySelectorAll('.stream-input');
+
+            const data = Array.from(inputs)
+                .map(i => i.value.trim())
+                .filter(v => v !== '')
+                .map(v => ({ type: 'item', value: v }));
+            
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = fieldName;
+            hidden.value = JSON.stringify(data);
+            form.appendChild(hidden);
+
+            inputs.forEach(i => i.disabled = true);
         });
     });
 });

@@ -1,16 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'friends/friend_page.html' %}
 {% load wagtailcore_tags static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href={% static 'css/friend_page.css' %}>
+{% block theme_css %}
     <link rel="stylesheet" href={% static 'css/dino.css' %}>
 {% endblock %}
 
-{% block content %}
+{% block friendpage %}
     <div class="page page-left">
         {% comment %} Optional {% endcomment %}
         {% if page.friend_picture %}
-        {% include 'friends/element_picture.html' with picture=page.friend_picture theme_shape="frame-egg" %}
+            {% include 'friends/element_picture.html' with picture=page.friend_picture theme_shape="frame-egg" %}
         {% endif %}
         
         {% comment %} Required {% endcomment %}

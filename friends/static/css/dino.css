@@ -11,9 +11,13 @@ body {
     background-color: #fff8dc;
 }
 
-.question-label {
+.question-label, li::marker {
     font-family: "JelloStone";
     color: #5A4522;
+}
+
+ul {
+    list-style-type: square;
 }
 
 .answer-label {

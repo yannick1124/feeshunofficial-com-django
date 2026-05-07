@@ -1,0 +1,51 @@
+body {
+    background-color: #30f8ab;
+}
+
+.page {
+    background-color: #24ba80;
+}
+
+.question-label, li::marker {
+    font-family: "Nunito Sans", sans-serif;
+    color: white;
+    font-weight: bold;
+}
+
+.answer-label {
+    color: red;
+    text-decoration-color: white;
+    text-shadow: none;
+    font-weight: normal;
+}
+
+.picture-frame.frame-fish img {
+    mask-image: url("../images/frames/mask-fish.png");
+    mask-origin: content-box;
+    mask-size: 100% 100%;
+}
+
+@media screen and (width <= 500.0px) {
+    .picture-frame {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 0;
+        position: relative;
+    }
+
+    .picture-frame.frame-fish {
+        aspect-ratio: 1 / 1;
+        max-width: 300.0px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (width > 500.0px) {
+    .picture-frame {
+        position: relative;
+        float: right;
+        margin: -3rem -4rem 16px 0;
+    }
+}

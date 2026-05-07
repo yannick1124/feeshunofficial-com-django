@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static 'css/friend_page.css' %}>
+    {% block theme_css %}{% endblock  %}
+{% endblock  %}
+
+{% block content %}
+    {% block friendpage %}{% endblock %}
+    
+    {% if prev_friend %}
+        <a href="{{ prev_friend.url }}" class="friend-nav nav-left desktop-only">
+            <img src="{% static 'images/icons/arrow_left.svg' %}" alt="<">
+        </a>
+    {% endif %}
+
+    {% if next_friend %}
+        <a href="{{ next_friend.url }}" class="friend-nav nav-right desktop-only">
+            <img src="{% static 'images/icons/arrow_right.svg' %}" alt=">">
+        </a>
+    {% endif %}
+{% endblock %}

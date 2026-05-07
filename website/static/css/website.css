@@ -5,6 +5,7 @@ body {
 body.accessibility-mode * {
     font-family: "Noto Sans", sans-serif !important;
     line-height: 1.8 !important;
+    text-shadow: none;
     color: black;
 }
 
@@ -15,6 +16,7 @@ body.accessibility-mode h2,
 body.accessibility-mode h3,
 body.accessibility-mode h4,
 body.accessibility-mode h5,
-body.accessibility-mode h6 {
+body.accessibility-mode h6,
+body.accessibility-mode label {
     background-color: white;
 }

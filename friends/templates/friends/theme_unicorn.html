@@ -2,23 +2,23 @@
 {% load wagtailcore_tags static %}
 
 {% block theme_css %}
-    <link rel="stylesheet" href={% static 'css/magic.css' %}>
+    <link rel="stylesheet" href={% static 'css/unicorn.css' %}>
 {% endblock %}
 
 {% block friendpage %}
     <div class="page page-left">
         {% comment %} Optional {% endcomment %}
         {% if page.friend_picture %}
-            {% include 'friends/element_picture.html' with picture=page.friend_picture theme_shape="frame-crystal-ball" frame_foreground=True %}
+            {% include 'friends/element_picture.html' with picture=page.friend_picture theme_shape="frame-fairy" frame_background=True %}
         {% endif %}
-        
+
         {% comment %} Required {% endcomment %}
         {% include 'friends/answer_name.html' with answer_value=page.friend_name %}
-        
+
         {% comment %} Required {% endcomment %}
         {% include 'friends/answer_know_from.html' with answer_value=page.friend_know_from %}
-        
-        {% comment %} Optional {% endcomment %}
+
+                {% comment %} Optional {% endcomment %}
         {% if page.friend_contact %}
             {% include 'friends/answer_contact.html' with answer_value=page.friend_contact %}
         {% endif %}
@@ -61,7 +61,7 @@
 
         {% comment %} Required {% endcomment %}
         {% comment %} Theme question {% endcomment %}
-        {% include 'friends/special_answer_magic.html' with answer_value=page.friend_magic %}
+        {% include 'friends/special_answer_unicorn.html' with answer_value=page.friend_unicorn %}
     </div>
     
     <div class="page page-right">

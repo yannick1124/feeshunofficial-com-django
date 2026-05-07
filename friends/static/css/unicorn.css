@@ -1,30 +1,30 @@
 body {
-    background-color: #883677;
+    background-color: #fae8f9;
 }
 
 .page {
-    background-color: #441151;
+    background: #EECFD4;
+    background: linear-gradient(110deg,#EECFD4 15%, #EFB9CB 85%);
 }
 
-
 .question-label, li::marker {
-    font-family: "Metamorphous", serif;
-    color: #ca61c3;
+    font-family: "Griffy", system-ui;
+    color: #41443a;
 }
 
 .answer-label {
-    color: #fae8f9;
-    text-decoration-color: #ca61c3;
+    color: rgb(148, 5, 77);
+    text-decoration-color: hotpink;
 }
 
-.picture-frame.frame-crystal-ball img {
-    mask-image: url("../images/frames/mask-crystal-ball.png");
+.picture-frame.frame-fairy img {
+    mask-image: url("../images/frames/mask-fairy.png");
     mask-origin: content-box;
     mask-size: 100% 100%;
 }
 
-.picture-frame.frame-crystal-ball .foreground {
-    background-image: url("../images/frames/frame-crystal-ball.png");
+.picture-frame.frame-fairy .background {
+    background-image: url("../images/frames/frame-fairy.png");
     background-origin: content-box;
     background-size: 100% 100%;
     position: absolute;
@@ -32,7 +32,6 @@ body {
     bottom: 0;
     width: 100%;
     height: 300px;
-    pointer-events: none;
 }
 
 @media screen and (width <= 500px) {
@@ -45,15 +44,16 @@ body {
         position: relative;
     }
 
-    .picture-frame.frame-crystal-ball {
+    .picture-frame.frame-fairy {
         aspect-ratio: 1 / 1;
         max-width: 300px;
         margin: 0 auto;
     }
 
-    .picture-frame.frame-crystal-ball .foreground {
-        margin: 16px 0;
-        height: calc(100% - 32px);
+    .picture-frame.frame-fairy .background {
+        position: relative;
+        float: right;
+        margin: -3rem -4rem 16px 0;
     }
 }
 

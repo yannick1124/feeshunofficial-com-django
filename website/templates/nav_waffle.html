@@ -11,18 +11,39 @@
     <div id="waffle-menu" class="waffle-menu-grid">
         <span type="button" class="waffle-item toggle-btn" onclick="toggleAccessibility()" aria-label="Toggle Accessibility Mode">
             <img src="{% static 'images/icons/contrast.svg' %}"
-                    alt=""
-                    class="waffle-item-icon-img">
+                 alt="Accessibility"
+                 class="waffle-item-icon-img">
             <span class="waffle-label">Easy Read</span>
         </span>
 
         {% if "/friends/" in request.path and user.is_staff %}
-            <a href="" class="waffle-item add-btn" aria-label="Add New Friends Page">
+            <a href="/friends/add-theme/" class="waffle-item add-btn" aria-label="Add New Friends Page">
                 <img src="{% static 'images/icons/add.svg' %}"
-                     alt=""
+                     alt="+"
                      class="waffle-item-icon-img">
                 <span class="waffle-label">Add</span>
             </a>
+
+            {% if prev_friend or next_friend %}
+                <a href="{{ prev_friend.url }}"
+                   class="waffle-item mobile-only nav-prev"
+                   aria-label="Previous Friend"
+                   {% if not prev_friend %} style="visibility:hidden" {% endif %}>
+                    <img src="{% static 'images/icons/arrow_left.svg' %}"
+                         alt="<"
+                         class="waffle-item-icon-img">
+                    <span class="waffle-label">Previous</span>
+                </a>
+                <a href="{{ next_friend.url }}"
+                   class="waffle-item mobile-only nav-next"
+                   aria-label="Next Friend"
+                   {% if not next_friend %} style="visibility:hidden" {% endif %}>
+                    <img src="{% static 'images/icons/arrow_right.svg' %}"
+                         alt=">"
+                         class="waffle-item-icon-img">
+                    <span class="waffle-label">Next</span>
+                </a>
+            {% endif %}
         {% endif %}
 
         {% if menu %}
@@ -30,13 +51,14 @@
                 {% if not item.hide_on_url_keyword or item.hide_on_url_keyword not in request.path %}
                     <a href="{{ item.link_url }}" class="waffle-item" {% if item.aria_label %}aria-label="{{ item.aria_label }}"{% endif %}>
                         <img src="{{ item.icon_url }}"
-                            alt=""
-                            class="waffle-item-icon-img">
+                             alt="{{ item.aria_label }}"
+                             class="waffle-item-icon-img">
                         <span class="waffle-label">{{ item.label }}</span>
                     </a>
                 {% endif %}
             {% endfor %}
         {% endif %}
+
     </div>
 
     <script>

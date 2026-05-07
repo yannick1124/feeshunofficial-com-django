@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {% for key, value in request.POST.items %}
+        <div>
+            <span>{{ key }}:</span>
+            <span>{{ value }}</span>
+        </div>
+    {% endfor %}
+{% endblock %}

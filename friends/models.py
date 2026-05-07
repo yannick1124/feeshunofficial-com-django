@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.apps import apps
 from django.shortcuts import redirect
 
@@ -10,6 +10,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.models import Page
 from wagtail_color_panel.fields import ColorField
 from wagtail_color_panel.edit_handlers import NativeColorPanel
+from wagtail.images import get_image_model
 from wagtail.images.models import Image
 
 from datetime import date
@@ -25,7 +26,32 @@ THEMES = {
         'image': '/static/images/examples/magic_example.png',
         'class': 'friends.MagicFriendPage'
     },
+    'unicorn': {
+        'label': 'Unicorn Theme',
+        'image': '/static/images/examples/unicorn_example.png',
+        'class': 'friends.UnicornFriendPage'
+    },
+    'ocean': {
+        'label': 'Ocean Theme',
+        'image': '/static/images/examples/ocean_example.png',
+        'class': 'friends.OceanFriendPage'
+    },
+    'fish': {
+        'label': 'Feesh Theme',
+        'image': '/static/images/examples/fish_example.png',
+        'class': 'friends.FishFriendPage'
+    },
 }
+
+UNICORN_CHOICES = [
+    ('glitters', 'Glitters'),
+    ('sparkles', 'Sparkles'),
+]
+
+OCEAN_CHOICES = [
+    ('penguins', 'Penguins'),
+    ('dolphins', 'Dolphins'),
+]
 
 class FriendPage(Page):
     theme_questions = []
@@ -135,20 +161,125 @@ class FriendPage(Page):
         FieldPanel('friend_dislikes'),
         FieldPanel('friend_cool')
     ]
-    # TODO: MOVE verbose_nameS TO VERBOSE NAMES
 
     @property
     def friend_age(self):
-        if not self.friend_bday or self.friend_bday == date(1900, 1, 1):
+        if not self.friend_bday or self.friend_bday == date(1, 1, 1):
             return '???'
         
         today = date.today()
         return today.year - self.friend_bday.year - (
             (today.month, today.day) < (self.friend_bday.month, self.friend_bday.day)
         )
+    
+    def get_neighbor_pages(self):
+        siblings = self.get_parent().get_children().live().public()
+
+        friend_siblings = [p for p in siblings if p.slug.isdigit()]
+
+        friend_siblings.sort(key=lambda p: int(p.slug))
+
+        prev_page = None
+        next_page = None
+
+        for i, page in enumerate(friend_siblings):
+            if page.id == self.id:
+                if i > 0:
+                    prev_page = friend_siblings[i - 1]
+                if i < len(friend_siblings) - 1:
+                    next_page = friend_siblings[i + 1]
+                break
+        
+        return prev_page, next_page
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        
+        prev_p, next_p = self.get_neighbor_pages()
+        
+        context['prev_friend'] = prev_p
+        context['next_friend'] = next_p
+
+        return context
 
     class Meta:
         abstract = True
+
+class DinoFriendPage(FriendPage):
+    template = 'friends/theme_dino.html'
+    theme_questions = [
+        'friend_dino'
+    ]
+
+    friend_dino = models.CharField(
+        max_length=255,
+        verbose_name='"My favorite dinosaur is ___:"',
+        default='[How did you do this? This is a required field!]'
+    )
+
+    for theme_question in theme_questions:
+        content_panels = FriendPage.content_panels + [
+            FieldPanel(theme_question)
+        ]
+
+class MagicFriendPage(FriendPage):
+    template = 'friends/theme_magic.html'
+    theme_questions = [
+        'friend_magic'
+    ]
+
+    friend_magic = models.CharField(
+        max_length=255,
+        verbose_name='"If I had magic, it would be ___ magic:"',
+        default='[How did you do this? This is a required field!]'
+    )
+
+    for theme_question in theme_questions:
+        content_panels = FriendPage.content_panels + [
+            FieldPanel(theme_question)
+        ]
+
+class UnicornFriendPage(FriendPage):
+    template = 'friends/theme_unicorn.html'
+    theme_questions = [
+        'friend_unicorn'
+    ]
+
+    friend_unicorn = models.CharField(
+        max_length=10,
+        verbose_name='"Do you like glitters or sparkles better?"',
+        choices=UNICORN_CHOICES,
+        default='glitters'
+    )
+
+    for theme_question in theme_questions:
+        content_panels = FriendPage.content_panels + [
+            FieldPanel(theme_question)
+        ]
+
+class OceanFriendPage(FriendPage):
+    template = 'friends/theme_ocean.html'
+    theme_questions = [
+        'friend_ocean'
+    ]
+
+    friend_ocean = models.CharField(
+        max_length=10,
+        verbose_name='"Penguins or dolphins?"',
+        choices=OCEAN_CHOICES,
+        default='penguins'
+    )
+
+    for theme_question in theme_questions:
+        content_panels = FriendPage.content_panels + [
+            FieldPanel(theme_question)
+        ]
+
+class FishFriendPage(FriendPage):
+    template = 'friends/theme_fish.html'
+
+class FormResultsPage(Page):
+    template = 'friends/form_results.html'
 
 class AddPageTheme(Page):
     theme_choice = models.CharField(
@@ -190,7 +321,7 @@ class AddPageContent(Page):
                 
                 if model_class:
                     for field in model_class._meta.get_fields():
-                        if field.name == 'title' or field.name.startswith('friend'):
+                        if field.name.startswith('friend'):
                             if isinstance(field, ColorField):
                                 assigned_type = 'ColorField'
                             elif field.__class__.__name__ == 'StreamField':
@@ -217,37 +348,48 @@ class AddPageContent(Page):
         
         context['theme_questions'] = questions
         return context
+    
+    def serve(self, request):
+        if request.method == 'POST':
+            theme_key = request.POST.get('theme')
 
-class DinoFriendPage(FriendPage):
-    template = 'friends/theme_dino.html'
-    theme_questions = [
-        'friend_dino'
-    ]
+            if theme_key in THEMES:
+                class_path = THEMES[theme_key]['class']
+                app_label, model_name = class_path.split('.')
+                model_class = apps.get_model(app_label, model_name)
 
-    friend_dino = models.CharField(
-        max_length=255,
-        verbose_name="My favorite dinosaur is ___",
-        default='[How did you do this? This is a required field!]'
-    )
+                parent_page = self.get_parent()
 
-    for theme_question in theme_questions:
-        content_panels = FriendPage.content_panels + [
-            FieldPanel(theme_question)
-        ]
+                all_slugs = set(parent_page.get_children().values_list('slug', flat=True))
+                counter = 1
+                while str(counter) in all_slugs:
+                    counter += 1
+                new_title = str(counter)
 
-class MagicFriendPage(FriendPage):
-    template = 'friends/theme_magic.html'
-    theme_questions = [
-        'friend_magic'
-    ]
+                data = {
+                    key: value for key, value in request.POST.items()
+                    if key not in ['csrfmiddlewaretoken', 'theme', 'friend_picture']
+                }
 
-    friend_magic = models.CharField(
-        max_length=255,
-        verbose_name="If I had magic, it would be ___ magic",
-        default='[How did you do this? This is a required field!]'
-    )
+                friend_image = None
+                if 'friend_picture' in request.FILES:
+                    ImageModel = get_image_model()
+                    friend_image = ImageModel.objects.create(
+                        title=f"Upload by {data.get('friend_name', 'Unknown')}",
+                        file=request.FILES['friend_picture']
+                    )
 
-    for theme_question in theme_questions:
-        content_panels = FriendPage.content_panels + [
-            FieldPanel(theme_question)
-        ]
+                with transaction.atomic():
+                    new_page = model_class(
+                        title=new_title,
+                        slug=new_title,
+                        friend_picture=friend_image,
+                        **data
+                    )
+
+                    parent_page.add_child(instance=new_page)
+                    new_page.save_revision().publish()
+
+                return redirect(new_page.url)
+
+        return super().serve(request)

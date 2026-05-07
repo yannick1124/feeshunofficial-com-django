@@ -11,13 +11,114 @@
     grid-template-rows: 1fr;
     padding: 0 80px;
 }
+.form-container.questions {
+    display: flex;
+    height: auto;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: left;
+    gap: 20px;
+    max-width: 100%;
+}
 
-.form-item {
+.themes .form-item {
     margin: auto;
+}
+.questions .form-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.stream-entries {
+    margin: 0;
+}
+
+.stream-entries .form-item {
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: min-content auto min-content;
+    gap: 10px;
+}
+
+.entry-bullet, .remove-stream-item {
+    margin: auto;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+}
+.entry-bullet {
+    font-size: x-large !important;
+}
+.remove-stream-item {
+    cursor: pointer;
+    overflow: hidden;
+}
+.remove-stream-item img {
+    margin: auto;
+    width: 48px;
+    height: 48px;
+    margin: -12px;
+    filter: brightness(0) saturate(100%) invert(19%) sepia(92%) saturate(5066%) hue-rotate(355deg) brightness(111%) contrast(128%);
+}
+
+.questions label {
+    margin-right: 42px;
+    font-weight: bold;
+}
+.questions label .required {
+    font-weight: bolder;
+    padding-right: 2px;
+    text-shadow:
+        -2px -2px 0px #FFF,
+        -1px -2px 0px #FFF,
+         0px -2px 0px #FFF,
+         1px -2px 0px #FFF,
+         2px -2px 0px #FFF,
+        -2px -1px 0px #FFF,
+        -1px -1px 0px #FFF,
+         0px -1px 0px #FFF,
+         1px -1px 0px #FFF,
+         2px -1px 0px #FFF,
+        -2px  0px 0px #FFF,
+        -1px  0px 0px #FFF,
+         0px  0px 0px #FFF,
+         1px  0px 0px #FFF,
+         2px  0px 0px #FFF,
+        -2px  1px 0px #FFF,
+        -1px  1px 0px #FFF,
+         0px  1px 0px #FFF,
+         1px  1px 0px #FFF,
+         2px  1px 0px #FFF,
+        -2px  2px 0px #FFF,
+        -1px  2px 0px #FFF,
+         0px  2px 0px #FFF,
+         1px  2px 0px #FFF,
+         2px  2px 0px #FFF;
+}
+
+.questions input:not(.type-color), .questions select {
+    padding: 8px;
+    min-width: 0 !important;
+    border: none;
+    border-radius: 6px;
+}
+
+.questions input:not(.type-stream), .questions select {
+    margin-right: 42px;
+}
+
+.questions input:not(.type-image):not(.type-color) {
+    box-shadow: 0px 3px 5px -2px rgba(0,0,0,0.75);
 }
 
 .form-item * {
     font-size: large;
+}
+
+.questions .submit-container button {
+    margin: 0 42px 0 auto;
 }
 
 .example-container {
@@ -36,6 +137,7 @@
 .example-container .theme-example {
     max-width: 90%;
     max-height: 70vh;
+    box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.5);
 }
 
 @media screen and (width <= 720px) {

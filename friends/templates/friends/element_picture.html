@@ -1,6 +1,9 @@
 {% load wagtailimages_tags %}
 
 <div class="picture-frame {{ theme_shape }}">
+    {% if frame_background %}
+        <div class="background"></div>
+    {% endif %}
     {% if picture %}
         {% image picture fill-300x300 as img %}
         <img src="{{ img.url }}"

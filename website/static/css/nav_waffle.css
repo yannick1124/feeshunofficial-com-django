@@ -1,3 +1,8 @@
+.waffle-nav {
+    position: relative; 
+    z-index: 9999;
+}
+
 .waffle-btn {
     background: white;
     border: none;
@@ -12,6 +17,8 @@
     position: fixed;
     top: 18px;
     right: 18px;
+
+    z-index: 10000;
 }
 
 .waffle-icon-img {
@@ -36,6 +43,8 @@
     padding: 15px;
     grid-template-columns: repeat(2, 120px);
     gap: 10px;
+
+    z-index: 10001;
 }
 
 .waffle-menu-grid.active {
@@ -79,4 +88,14 @@ body.accessibility-mode .waffle-icon-img,
 body.accessibility-mode .waffle-item {
     filter: none;
     color: #333333;
+}
+
+.mobile-only {
+    display: none !important;
+}
+
+@media screen and (width <= 500px) {
+    .mobile-only {
+        display: flex !important;
+    }
 }
