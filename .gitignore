@@ -46,3 +46,4 @@ Thumbs.db
 
 # Production files
 /static/
+datadump.json
