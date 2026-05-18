@@ -4,3 +4,4 @@ wagtail-markdown==0.13.0
 dj-database-url>=2.1.0
 python-decouple>=3.8
 vaderSentiment>=3.3.2
+detoxify==0.5.2
