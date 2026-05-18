@@ -43,3 +43,6 @@ Thumbs.db
 # Workspaces
 .workspaces/
 .vscode/
+
+# Production files
+/static/
