@@ -5,16 +5,74 @@
     border-radius: 30px;
 }
 
-@media screen and (width > 500px) {
+h1 {
+    color: white;
+    text-shadow: -2px -2px 0 #808080,
+                 -1px -2px 0 #808080,
+                  0   -2px 0 #808080,
+                  1px -2px 0 #808080,
+                  2px -2px 0 #808080,
+                 -2px -1px 0 #808080,
+                 -1px -1px 0 #808080,
+                  0   -1px 0 #808080,
+                  1px -1px 0 #808080,
+                  2px -1px 0 #808080,
+                 -2px  0   0 #808080,
+                 -1px  0   0 #808080,
+                  1px  0   0 #808080,
+                  2px  0   0 #808080,
+                 -2px  1px 0 #808080,
+                 -1px  1px 0 #808080,
+                  0    1px 0 #808080,
+                  1px  1px 0 #808080,
+                  2px  1px 0 #808080,
+                 -2px  2px 0 #808080,
+                 -1px  2px 0 #808080,
+                  0    2px 0 #808080,
+                  1px  2px 0 #808080,
+                  2px  2px 0 #808080,
+
+                 -2px 6px 0 #333,
+                 -1px 6px 0 #333,
+                  0   6px 0 #333,
+                  1px 6px 0 #333,
+                  2px 6px 0 #333;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: xxx-large;
+}
+
+h2 {
+    text-shadow: -1px -2px 0 #808080,
+                  0   -2px 0 #808080,
+                  1px -2px 0 #808080,
+                 -1px -1px 0 #808080,
+                  0   -1px 0 #808080,
+                  1px -1px 0 #808080,
+                 -1px  0   0 #808080,
+                  1px  0   0 #808080,
+                 -1px  1px 0 #808080,
+                  0    1px 0 #808080,
+                  1px  1px 0 #808080,
+                 -1px  2px 0 #808080,
+                  0    2px 0 #808080,
+                  1px  2px 0 #808080,
+
+                 -1px 6px 0 #333,
+                  0   6px 0 #333,
+                  1px 6px 0 #333;
+}
+
+@media screen and (width > 700px) {
     .profile-pic {
         max-width: 33%;
         position: relative;
-        float: left;
-        margin-right: 18px;
+        float: right;
+        margin-left: 24px;
     }
 }
 
-@media screen and (width <= 500px) {
+@media screen and (width <= 700px) {
     .profile-pic {
         max-width: 80%;
         position: static;
