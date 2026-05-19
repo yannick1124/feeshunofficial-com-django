@@ -7,15 +7,18 @@
 
 {% block extra_css %}
     <link rel="stylesheet" href={% static 'css/text_page.css' %}>
+    <link rel="stylesheet" href={% static 'css/welcome_page.css' %}>
     <link rel="stylesheet" href={% static 'css/nav_buttons.css' %}>
 {% endblock %}
 
 {% block content %}
-    {% if page.picture %}
-        {% image page.picture fill-800x400 as tmp_photo %}
-        <img src="{{ tmp_photo.url }}" width="{{ tmp_photo.width }}" height="{{ tmp_photo.height }}" alt="{{ tmp_photo.alt }}">
-    {% endif %}
-    {{ page.body|markdown }}
+    <div>
+        {% if page.picture %}
+            {% image page.picture fill-400x400 as tmp_photo %}
+            <img src="{{ tmp_photo.url }}" class="profile-pic" width="{{ tmp_photo.width }}" height="{{ tmp_photo.height }}" alt="{{ tmp_photo.alt }}">
+        {% endif %}
+        {{ page.body|markdown }}
+    </div>
 
     {% include 'home/nav_buttons.html' with buttons='labs friends contact disclaimer' %}
 {% endblock %}
