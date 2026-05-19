@@ -19,6 +19,8 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
+          timeout: 5m
+          command_timeout: 10m
           script: |
             cd /var/www/wagtail
             git pull origin deploy
