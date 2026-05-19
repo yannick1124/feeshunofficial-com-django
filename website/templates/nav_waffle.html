@@ -16,7 +16,7 @@
             <span class="waffle-label">Easy Read</span>
         </span>
 
-        {% if "/friends/" in request.path and user.is_staff %}
+        {% if "/friends/" in request.path %}
             <a href="/friends/add-theme/" class="waffle-item add-btn" aria-label="Add New Friends Page">
                 <img src="{% static 'images/icons/add.svg' %}"
                      alt="+"
