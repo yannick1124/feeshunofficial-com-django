@@ -29,9 +29,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/website.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/nav_waffle.css' %}">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+        {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Griffy&family=Hind:wght@300;400;500;600;700&family=Indie+Flower&family=Metamorphous&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Special+Elite&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&family=Griffy&family=Hind:wght@300;400;500;600;700&family=Indie+Flower&family=Metamorphous&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Special+Elite&display=swap" rel="stylesheet"> {% endcomment %}
+
+        <link href="https://fonts.bunny.net/css?family=Delius+Swash+Caps&family=Griffy&family=Hind:wght@300;400;500;600;700&family=Indie+Flower&family=Metamorphous&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Special+Elite&display=swap" rel="stylesheet">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
