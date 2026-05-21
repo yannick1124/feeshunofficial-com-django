@@ -141,7 +141,7 @@
 }
 
 @media screen and (width <= 720px) {
-    .form-container {
+    .form-container.themes {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         height: 40vh;
