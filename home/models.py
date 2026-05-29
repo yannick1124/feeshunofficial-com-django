@@ -1,9 +1,21 @@
 from django.db import models
 
 from django.shortcuts import redirect
+from wagtail import blocks
+from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, PageChooserPanel
 from wagtailmarkdown.fields import MarkdownField
+
+# Blocks
+
+class DonationButtonBlock(blocks.StructBlock):
+    button_text = blocks.CharBlock(required=False, default='Send me a tip!')
+
+    class Meta:
+        template = 'home/dono_button.html'
+
+# Page templates
 
 class GenericRedirectPage(Page):
     '''
@@ -42,8 +54,16 @@ class GenericRedirectPage(Page):
 class MarkdownPage(Page):
     body = MarkdownField(blank=True)
 
+    donation_button = StreamField(
+        [('donation_button', DonationButtonBlock())],
+        blank=True,
+        null=True,
+        use_json_field=True
+    )
+
     content_panels = Page.content_panels + [
-        FieldPanel('body')
+        FieldPanel('body'),
+        FieldPanel('donation_button')
     ]
 
 class LandingPage(Page):

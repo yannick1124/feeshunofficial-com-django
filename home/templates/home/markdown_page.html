@@ -9,5 +9,7 @@
 {% block content %}
     {{ page.body|markdown }}
 
+    {% include_block page.donation_button %}
+
     {% include 'home/nav_buttons.html' with buttons='home labs friends contact disclaimer' %}
 {% endblock content %}

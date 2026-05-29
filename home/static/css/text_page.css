@@ -4,7 +4,8 @@ body {
 
 .content {
     background-color: #30f8ab;
-    min-height: calc(100vh - 16px);
+    min-height: calc(100vh - 66px);
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
 }
