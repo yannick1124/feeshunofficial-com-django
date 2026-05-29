@@ -35,6 +35,13 @@ ul {
     font-size: xx-large;
 }
 
+li.answer-label {
+    display: list-item;
+}
+li.answer-label::marker {
+    font-size: x-large;
+}
+
 .answer-color-display {
     position: relative;
     display: inline-block;
