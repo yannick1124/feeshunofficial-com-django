@@ -5,7 +5,7 @@ body {
 .content {
     padding-top: 56px;
     background-color: #30f8ab;
-    min-height: calc(100vh - 66px);
+    min-height: calc(100vh - 72px);
     display: flex;
     flex-direction: column;
 }
