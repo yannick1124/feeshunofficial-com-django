@@ -1,0 +1,44 @@
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 45deg;
+  inherits: false;
+}
+
+.dono-button-border {
+    display: inline-block;
+    padding: 4px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 8px -2px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+
+    background: conic-gradient(from var(--gradient-angle) in oklch longer hue,
+        oklch(0.8 0.4 0deg),
+        oklch(0.8 0.4 360deg)
+    );
+
+    transition: --gradient-angle 0.5s ease-in-out;
+}
+.dono-button-border:hover {
+    --gradient-angle: 405deg;
+}
+
+.dono-button {
+    display: block;
+    background-color: black;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: larger;
+    font-weight: bolder;
+    text-align: center;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+.dono-button * {
+    margin: 0;
+}
+
+.dono-button h1, h2, h3, h4 {
+    font-family: "Momo Trust Display", sans-serif;
+    font-weight: 400;
+}

@@ -6,11 +6,13 @@ from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, PageChooserPanel
 from wagtailmarkdown.fields import MarkdownField
+from wagtailmarkdown.blocks import MarkdownBlock
 
 # Blocks
 
 class DonationButtonBlock(blocks.StructBlock):
-    button_text = blocks.CharBlock(required=False, default='Send me a tip!')
+    splash_label = MarkdownBlock(required=False)
+    button_text = MarkdownBlock(required=False, default='Send me a tip!')
 
     class Meta:
         template = 'home/dono_button.html'
