@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags static wagtailmarkdown %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href={% static 'css/text_page.css' %}>
+    <link rel="stylesheet" href={% static 'css/contact_page.css' %}>
+    <link rel="stylesheet" href={% static 'css/nav_buttons.css' %}>
+    <link rel="stylesheet" href={% static 'css/link_block.css' %}>
+    <link rel="stylesheet" href={% static 'css/dono_button.css' %}>
+{% endblock %}
+
+{% block content %}
+    {{ page.body|markdown }}
+
+    <div class="form-container">
+        {% if page.intro %}
+            <div class="intro-text">
+                {{ page.intro|markdown }}
+            </div>
+        {% endif %}
+
+        <form action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="field-wrapper">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="error">{{ field.errors }}</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="links-container">
+        {% include_block page.link_block %}
+        {% include_block page.donation_button %}
+    </div>
+
+    {% include 'home/nav_buttons.html' with buttons='home labs friends contact disclaimer' %}
+
+    {{ email_mapping|json_script:"email-mapping-data" }}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src={% static 'js/contact_page.js' %} defer></script>
+{% endblock %}

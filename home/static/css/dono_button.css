@@ -4,6 +4,10 @@
   inherits: false;
 }
 
+.dono-button-label {
+    text-align: center;
+}
+
 .dono-button-border {
     display: inline-block;
     padding: 4px;

@@ -1,0 +1,30 @@
+.link-label {
+    text-align: center;
+}
+
+.link-button {
+    display: flex;
+    margin: auto;
+    height: 110px;
+    width: 100%;
+    align-items: center;
+}
+
+.link-icon {
+    height: 100%;
+    width: auto;
+    margin: auto;
+    filter:
+        saturate(100%)
+        invert(51%)
+        sepia(64%)
+        saturate(502%)
+        hue-rotate(105deg)
+        brightness(53%)
+        contrast(86%);
+    transition: transform 0.5s ease;
+}
+
+.link-button:hover .link-icon {
+    transform: scale(1.1);
+}

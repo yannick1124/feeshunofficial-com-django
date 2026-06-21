@@ -1,0 +1,11 @@
+{% load static %}
+{% load wagtailmarkdown %}
+
+<div class="link-block">
+    <div class="link-label">
+        {{ value.splash_label|markdown }}
+    </div>
+    <a class="link-button" href="{{ value.link }}">
+        <img class="link-icon" src="{% static self.image %}" alt="">
+    </a>
+</div>

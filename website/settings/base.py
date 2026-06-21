@@ -196,3 +196,49 @@ WAGTAILADMIN_BASE_URL = 'http://example.com'
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
+
+# Contact Page Email Routing Configuration
+EMAIL_MAPPING = [
+    {
+        'parameter': 'general',
+        'category': 'General',
+        'address': env('EMAIL_GENERAL'),
+        'default': True
+    },
+    {
+        'parameter': 'work',
+        'category': 'Employment Opportunities',
+        'address': env('EMAIL_WORK'),
+        'default': False
+    },
+    {
+        'parameter': 'legal',
+        'category': 'Copyright and Legal Matters',
+        'address': env('EMAIL_LEGAL'),
+        'default': False
+    },
+    {
+        'parameter': 'friends',
+        'category': 'Friend Page Support',
+        'address': env('EMAIL_FRIENDS'),
+        'default': False
+    },
+    {
+        'parameter': 'bugs',
+        'category': 'Bug Reports',
+        'address': env('EMAIL_BUGS'),
+        'default': False
+    },
+    {
+        'parameter': 'suggestions',
+        'category': 'Suggestions',
+        'address': env('EMAIL_SUGGESTIONS'),
+        'default': False
+    },
+    {
+        'parameter': 'art',
+        'category': 'Art Submissions',
+        'address': env('EMAIL_ART'),
+        'default': False
+    }
+]
