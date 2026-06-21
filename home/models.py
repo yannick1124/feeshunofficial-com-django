@@ -210,7 +210,7 @@ class ContactPage(Page):
                     message=content,
                     from_email=self.from_address or settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[recipient],
-                    reply_to=[visitor_email]
+                    # reply_to=[visitor_email]
                 )
 
                 return render(request, self.get_template(request), {

@@ -9,7 +9,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 try:
