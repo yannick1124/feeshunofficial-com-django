@@ -9,7 +9,7 @@ from wagtail.fields import StreamField, RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.models import Page
 from wagtail_color_panel.fields import ColorField
-from wagtail_color_panel.edit_handlers import NativeColorPanel
+from wagtail_color_panel.edit_handlers import NativeColorPanel, PolyfillColorPanel
 from wagtail.images import get_image_model
 from wagtail.images.models import Image
 
@@ -368,7 +368,7 @@ class AddPageContent(Page):
 
                 data = {
                     key: value for key, value in request.POST.items()
-                    if key not in ['csrfmiddlewaretoken', 'theme', 'friend_picture']
+                    if key not in ['csrfmiddlewaretoken', 'theme', 'friend_picture', 'friend_color_picker']
                 }
 
                 friend_image = None
@@ -378,6 +378,9 @@ class AddPageContent(Page):
                         title=f"Upload by {data.get('friend_name', 'Unknown')}",
                         file=request.FILES['friend_picture']
                     )
+                
+                if data.get('friend_color') == '':
+                    data['friend_color'] = None
 
                 with transaction.atomic():
                     new_page = model_class(

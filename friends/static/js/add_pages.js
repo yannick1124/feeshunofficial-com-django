@@ -30,6 +30,7 @@ if (selector) {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form.content-extension');
     const streams = document.querySelectorAll('.streamfield-container');
+    const colorPickers = document.querySelectorAll('.type-color');
 
     streams.forEach(stream => {
         stream.addEventListener('input', (e) => {
@@ -92,6 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
             form.appendChild(hidden);
 
             inputs.forEach(i => i.disabled = true);
+        });
+    });
+
+    colorPickers.forEach(picker => {
+        picker.addEventListener('change', (e) => {
+            const hiddenInput = picker.parentElement.querySelector('.type-hidden');
+            if (hiddenInput) {
+                hiddenInput.value = e.target.value;
+            }
         });
     });
 });
