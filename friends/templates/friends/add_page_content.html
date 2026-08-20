@@ -27,7 +27,7 @@
                         <input type="date" class="type-date" name="{{ question.name }}" {% if question.required %}required{% endif %}>
 
                     {% elif question.type == 'ColorField' or 'Color' in question.type %}
-                        <input type="color" class="type-color" name="{{ question.name }}" value="#ffffff00" {% if question.required %}required{% endif %}>
+                        <input type="color" class="type-color" name="{{ question.name }}" value="" {% if question.required %}required{% endif %}>
                     
                     {% elif question.type == 'ImageChooser' %}
                         {% comment %} TODO: HAVE TO UPDATE THIS {% endcomment %}
